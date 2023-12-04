@@ -14,6 +14,7 @@ def show_visit_reports_by_inspector():
     print()
     print("Bezoekrapporten:")
     print("naam bedrijf, bezoekdatum, datum van het rapport, opmerking, status")
+    print("-------------------------------------------------------------------")
     for visit_report in visit_reports:
         for company in companies:
             if company.get_code() == visit_report.get_company_code():
@@ -30,11 +31,12 @@ def show_visit_reports_by_company():
     visit_reports.sort(key=__get_visit_at, reverse=True)
     print()
     print("Bezoekrapporten:")
-    print("naam inspecteur, bezoekdatum, datum van het rapport, opmerking, status")
+    print("naam inspecteur     bezoekdatum, datum van het rapport, opmerking, status")
+    print("-------------------------------------------------------------------------")
     for visit_report in visit_reports:
         for inspector in inspectors:
             if inspector.get_code() == visit_report.get_inspector_code():
-                print(inspector.get_name() + ', ' + str(visit_report.get_visit_at()) + ', ' + str(visit_report.get_created_at()) + ', ' + visit_report.get_comment() + ', ' + visit_report.get_status())
+                print(inspector.get_name() + str(visit_report.get_visit_at()) + ', ' + str(visit_report.get_created_at()) + ', ' + visit_report.get_comment() + ', ' + visit_report.get_status())
 
 #
 # Private Functions

@@ -28,11 +28,18 @@ def read_gasses():
                 csvwriter.writerow(["breedtegraad", "lengtegraad", "Totale uitstoot"])
                 for gas_row in gas_rows:
                     gas_calculated_rows.append([gas_row[0], gas_row[1], float(gas_row[2]) * C1 + float(gas_row[3]) * C2 + float(gas_row[4]) * C3 + float(gas_row[5]) * C4])
+
                 csvwriter.writerows(gas_calculated_rows)
 
         gas_array = (np.loadtxt(GASSESCALCULATEDFILE, delimiter=',', skiprows=1, usecols=2)).reshape((100,100))
     except FileNotFoundError:
         print('Bestand', GASSESFILE, 'niet gevonden')
+        return
+    except IndexError:
+        print("Het bestand heeft een rij met niet het juiste aantal kolommen")
+        return
+    except ValueError:
+        print('Bestand heeft een ongeldige waarde')
         return
     
     gas_value_current_row = 0
